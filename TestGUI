@@ -1,0 +1,430 @@
+/*
+ *
+ *
+ *
+ */
+package capstonegroupproject;
+
+import java.util.ArrayList;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.collections.*;
+import javafx.event.*;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
+
+
+public class TestGUI extends Application {
+ 
+    
+    // Create primary pane
+    GridPane primaryPane = new GridPane();
+    
+    GridPane posPane = new GridPane();
+    GridPane managePane = new GridPane();
+    GridPane reportsPane = new GridPane();
+    GridPane employeePane = new GridPane();
+    GridPane addEmployeePane = new GridPane();
+    
+    GridPane expensePane = new GridPane();
+    GridPane supplierPane = new GridPane();
+    GridPane inventoryPane = new GridPane();
+    GridPane schedulePane = new GridPane();
+    
+    TabPane tbPane = new TabPane();
+    Tab tab1 = new Tab("POS");
+    Tab tab2 = new Tab("Manage");
+    Tab tab3 = new Tab("Reports");
+    
+    // Buttons
+    Button btnEmployees = new Button("Employees"); // Manage Page
+    Button btnExpenses = new Button("Expenses");
+    Button btnInventory = new Button("Inventory"); 
+    Button btnSchedule = new Button("Schedule");
+    Button btnSupplier = new Button("Supplier");
+    Button btnGenerate = new Button("Generate"); // Reports Page
+    Button btnAddSup = new Button("Add New Supplier"); // Supplier buttons
+    Button btnRemSup = new Button("Remove Supplier");
+    Button btnChangeImage = new Button("Change Image"); // Inventory Buttons
+    Button btnAddProd = new Button("Add New Product");
+    Button btnUpdateEmp = new Button("Update Employee"); // Employee Buttons
+    Button btnAddNewEmp = new Button("Add New Employee");
+    Button btnAddEmp = new Button("Add Employee"); // Button to ADD NEW EMPLOYEE
+    Button btnPrint = new Button("Print Receipt"); // POS Page
+    
+    // Labels
+    Label lblRType = new Label("Report Type: ");
+    Label lblSNum = new Label("Store #: ");
+    Label lblWeek = new Label("Week: ");
+    Label lblExpense = new Label("Current Expenses: ");
+    Label lblExpFilter = new Label("Filter by: ");
+    Label lblSupplier = new Label("Select Supplier: ");
+    Label lblInventory = new Label("Inventory: ");
+    Label lblEmployee = new Label("Employees: ");
+    Label lblTotal = new Label("Total:");
+    Label lblEmpName = new Label("Name:"); // Add Employee Page
+    Label lblEmpPos = new Label("Position:");
+    Label lblEmpPhone = new Label("Phone:");
+    Label lblEmpAddress = new Label("Address:");
+    Label lblEmpStatus = new Label("Employment Type:");
+    Label lblEmpWage = new Label("Wage:");
+    
+    
+    // TextFields
+    TextField txtSupInfo = new TextField();
+    TextField txtTotal = new TextField();
+    TextField txtEmpName = new TextField(); // Add Employee Page
+    TextField txtEmpPos = new TextField();
+    TextField txtEmpPhone = new TextField();
+    TextField txtEmpAddress = new TextField();
+    TextField txtEmpWage = new TextField();
+    
+    // TextAreas
+    TextArea taReports = new TextArea();
+    
+    // TableView
+    TableView tblReports = new TableView<>();
+    //ObservableList<Employee> tableData = FXCollections.observableArrayList();
+    TableView tblExpenses = new TableView<>();
+    //ObservableList<Expense> tableData = FXCollections.observableArrayList();
+    TableView tblSuppliers = new TableView<>();
+    //ObservableList<Supplier> tableData = FXCollections.observableArrayList();
+    TableView tblInventory = new TableView<>();
+    //ObservableList<Product> tableData = FXCollections.observableArrayList();
+    TableView tblEmployee = new TableView<>();
+    //ObservableList<Employee> tableData = FXCollections.observableArrayList();
+    TableView tblPOS = new TableView<>();
+    //ObservableList<Product> tableData = FXCollections.observableArrayList();
+    
+    // Observable Lists
+    ObservableList<Employee> empTableData = FXCollections.observableArrayList(Employee.Employee);
+    ObservableList obsEmpStatus = FXCollections.observableArrayList("Part Time", "Full Time");
+    
+    
+    
+    // ComboBoxes
+    ComboBox cmboRType = new ComboBox(); // Reports Page
+    ComboBox cmboSNum = new ComboBox();
+    ComboBox cmboWeek = new ComboBox();
+    ComboBox cmboExpFilter = new ComboBox(); // Expense Button
+    ComboBox cmboSupplier = new ComboBox(); // Supplier Button
+    ComboBox cmboInvItem = new ComboBox(); // Inventory Button
+    ComboBox cmboEmp = new ComboBox(); // Employee Button
+    ComboBox cmboEmpStatus = new ComboBox(obsEmpStatus); // Employee Status(Part/Full Time)
+    
+   
+    // Alerts
+    Alert addEmpEmpty = new Alert(Alert.AlertType.ERROR);
+    Alert aEName = new Alert(Alert.AlertType.ERROR);
+    Alert aEmpWage = new Alert(Alert.AlertType.ERROR);
+    Alert aEmpPos = new Alert(Alert.AlertType.ERROR);
+   
+    public void start(Stage primaryStage) {
+       
+        // Alert information
+        addEmpEmpty.setHeaderText("Empty Field!");
+        addEmpEmpty.setContentText("Please fill every field.");
+        aEName.setHeaderText("Invalid Employee Name!");
+        aEName.setContentText("Please enter a first and last name seperated by a space.");
+        aEmpWage.setHeaderText("Invalid Employee Wage!");
+        aEmpWage.setContentText("Please enter a wage amount greater than 0.");
+        aEmpPos.setHeaderText("Invalid Employee Status");
+        aEmpPos.setContentText("Please select an employee status.");
+        
+        primaryPane.setAlignment(Pos.CENTER);
+        posPane.setAlignment(Pos.CENTER);
+        managePane.setAlignment(Pos.CENTER);
+        reportsPane.setAlignment(Pos.TOP_LEFT);
+        reportsPane.setPadding(new Insets(10, 10, 10, 10));
+        posPane.setPadding(new Insets(10, 10, 10, 10));
+        
+        posPane.setVgap(10);
+        managePane.setVgap(25);
+        reportsPane.setVgap(10);
+        expensePane.setHgap(10);
+        expensePane.setVgap(10);
+        supplierPane.setHgap(20);
+        supplierPane.setVgap(20);
+        inventoryPane.setHgap(20);
+        inventoryPane.setVgap(20);
+        employeePane.setHgap(15);
+        employeePane.setVgap(15);
+        
+        // Set button size and fonts
+        btnEmployees.setMinSize(200, 50);
+        btnExpenses.setMinSize(200, 50);
+        btnInventory.setMinSize(200, 50);
+        btnSupplier.setMinSize(200, 50);
+        btnSchedule.setMinSize(200, 50);
+        btnAddEmp.setMinSize(150, 50);
+        btnAddNewEmp.setMinSize(150, 50);
+        btnUpdateEmp.setMinSize(100, 50);
+        
+        // Add POS tab nodes here
+        posPane.add(tblPOS, 0, 0, 6, 1);
+        posPane.add(lblTotal, 4, 1);
+        posPane.add(txtTotal, 5, 1);
+        posPane.add(btnPrint, 3, 2, 2, 1);
+        
+        
+        // Add Manage tab nodes here
+        managePane.add(btnEmployees, 0, 0);
+        managePane.add(btnExpenses, 0, 1);
+        managePane.add(btnInventory, 0, 2);
+        managePane.add(btnSupplier, 0, 3);
+        managePane.add(btnSchedule, 0, 4);
+        
+        // Add Reports tab nodes here
+        reportsPane.add(lblRType, 0, 1); // Labels
+        reportsPane.add(lblSNum, 2, 1);
+        reportsPane.add(lblWeek, 4, 1);
+        reportsPane.add(cmboRType, 1, 1); // ComboBoxes
+        reportsPane.add(cmboSNum, 3, 1);
+        reportsPane.add(cmboWeek, 5, 1);
+        reportsPane.add(btnGenerate, 6, 1, 2, 1); // Buttons
+        //btnGenerate.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        //reportsPane.add(taReports, 2, 10, 25, 10); // TextArea
+        
+        //tblReports.setItems(tableData);
+        reportsPane.add(tblReports, 1, 3, 6, 1);
+        tblReports.setMinWidth(550);
+        
+        // Create table columns
+        TableColumn tblcName = new TableColumn("Name");
+        TableColumn tblcHours = new TableColumn("Hours");
+        TableColumn tblcWages = new TableColumn("Wages Earned");
+        TableColumn tblcSales = new TableColumn("Sales");
+        
+        tblReports.getColumns().addAll(tblcName, tblcHours, tblcWages, tblcSales);
+        
+        TableColumn tblcCategory = new TableColumn("Category");
+        TableColumn tblcAmount = new TableColumn("Amount");
+        TableColumn tblcDue = new TableColumn("Due");
+        TableColumn tblcPaid = new TableColumn("Paid");
+        
+        tblExpenses.getColumns().addAll(tblcCategory, tblcAmount, tblcDue, tblcPaid);
+        
+        TableColumn tblcSupProduct = new TableColumn("Product");
+        TableColumn tblcProdCat = new TableColumn("Category");
+        TableColumn tblcPrice = new TableColumn("Price");
+        
+        tblSuppliers.getColumns().addAll(tblcSupProduct, tblcProdCat, tblcPrice);
+        
+        TableColumn tblcImage = new TableColumn("Image");
+        TableColumn tblcProduct = new TableColumn("Product");
+        TableColumn tblcStock = new TableColumn("# in Stock");
+        TableColumn tblcIncoming = new TableColumn("Amount Incoming");
+        TableColumn tblcDiscarded = new TableColumn("# Discarded");
+        
+        tblInventory.getColumns().addAll(tblcImage, tblcProduct, tblcStock, tblcIncoming, tblcDiscarded);
+        
+        TableColumn tblcEmpName = new TableColumn("Name");
+        TableColumn tblcPosition = new TableColumn("Position");
+        TableColumn tblcPhone = new TableColumn("Phone");
+        TableColumn tblcAddress = new TableColumn("Address");
+        TableColumn tblcWork = new TableColumn("Full/Part");
+        TableColumn tblcWage = new TableColumn("Wage");
+        
+        tblEmployee.getColumns().addAll(tblcName, tblcPosition, tblcPhone, tblcAddress, tblcWork, tblcWage);
+        
+        TableColumn tblcProdScan = new TableColumn("Product Scanned");
+        TableColumn tblcQuantity = new TableColumn("Amount");
+        TableColumn tblcProdPrice = new TableColumn("Price");
+        TableColumn tblcDiscount = new TableColumn("Discount");
+        TableColumn tblcApplied = new TableColumn("Applied");
+        TableColumn tblcTotal = new TableColumn("Total");
+        
+        tblPOS.getColumns().addAll(tblcProdScan, tblcQuantity, tblcProdPrice, tblcDiscount, tblcApplied, tblcTotal);
+        
+        primaryPane.add(tbPane, 0, 0);
+        
+        // Position panes inside tabs
+        tab1.setContent(posPane);
+        tab2.setContent(managePane);
+        tab3.setContent(reportsPane);
+        
+        tbPane.getTabs().add(tab1);
+        tbPane.getTabs().add(tab2);
+        tbPane.getTabs().add(tab3);
+        
+        
+        Scene primaryScene = new Scene(primaryPane, 750, 500);
+        primaryStage.setTitle("Thrifty Store");
+        primaryStage.setScene(primaryScene);
+        primaryStage.show();
+        
+        tbPane.setMinHeight(primaryScene.getHeight());
+        tbPane.setMinWidth(primaryScene.getWidth());
+        txtTotal.setMaxWidth(tblcTotal.getWidth());
+        
+        
+        // Lambdas for Manage Page buttons
+        btnEmployees.setOnAction(e -> {
+        
+        employeePane.setAlignment(Pos.CENTER);
+        employeePane.add(lblEmployee, 0, 0);
+        employeePane.add(cmboEmp, 0, 2);
+        employeePane.add(btnUpdateEmp, 1, 2);
+        employeePane.add(btnAddNewEmp, 2, 2);
+        
+        employeePane.add(tblEmployee, 0, 1, 3, 1);
+        
+        Scene empScene = new Scene(employeePane, 600, 650);
+        Stage empStage = new Stage();
+        empStage.setScene(empScene);
+        empStage.setTitle("Thrifty Store Employees");
+        empStage.show();
+        });
+        
+        // Add employee
+        btnAddNewEmp.setOnAction(e -> {
+        addEmployeePane.setAlignment(Pos.CENTER);
+        addEmployeePane.setVgap(10);
+        addEmployeePane.setHgap(5);
+        
+        addEmployeePane.add(lblEmpName, 0, 0); // Labels
+        addEmployeePane.add(lblEmpPos, 0, 1);
+        addEmployeePane.add(lblEmpPhone, 0, 2);
+        addEmployeePane.add(lblEmpAddress, 0, 3);
+        addEmployeePane.add(lblEmpStatus, 0, 4);
+        addEmployeePane.add(lblEmpWage, 0, 5);
+        addEmployeePane.add(txtEmpName, 1, 0); // TextFields
+        addEmployeePane.add(txtEmpPos, 1, 1);
+        addEmployeePane.add(txtEmpPhone, 1, 2);
+        addEmployeePane.add(txtEmpAddress, 1, 3);
+        addEmployeePane.add(cmboEmpStatus, 1, 4);
+        addEmployeePane.add(txtEmpWage, 1, 5);
+        addEmployeePane.add(btnAddEmp, 1, 7);
+        
+        
+        Scene addEmpScene = new Scene(addEmployeePane, 400, 300);
+        Stage addEmpStage = new Stage();
+        addEmpStage.setScene(addEmpScene);
+        addEmpStage.setTitle("Add Employee");
+        addEmpStage.show();
+        
+        
+        });
+        
+        btnAddEmp.setOnAction(e -> {
+            // Check for empty fields
+            boolean eName = txtEmpName.getText().trim().isEmpty();
+            boolean ePos = txtEmpPos.getText().trim().isEmpty();
+            boolean ePhone = txtEmpPhone.getText().trim().isEmpty();
+            boolean eAddress = txtEmpAddress.getText().trim().isEmpty();
+            boolean eWage = txtEmpWage.getText().trim().isEmpty();
+            if (eName || ePos || ePhone || eAddress || eWage) {
+                addEmpEmpty.showAndWait();
+            } else {
+                String empName = txtEmpName.getText();
+                if (empName.contains(" ") == false) { // If there is NO space in name
+                    aEName.showAndWait();
+                } else {
+                    int empStatus = cmboEmpStatus.getSelectionModel().getSelectedIndex();
+                    String empPos = txtEmpPos.getText();
+                    String empPhone = txtEmpPhone.getText();
+                    String empAddress = txtEmpAddress.getText();
+                    String empWage = txtEmpWage.getText();
+                    double empWage1 = Double.parseDouble(empWage);
+                    if (empWage1 <= 0) {
+                        aEmpWage.showAndWait();
+                    } else {
+                        if (empStatus < 0) {
+                            aEmpPos.showAndWait();
+                        } else {
+                        Employee employee = new Employee(empName, empPos, 
+                                empAddress, empPhone, empWage1);
+                                Employee.Employee.add(employee);
+                                empTableData.add(employee);
+                                
+                                txtEmpName.clear();
+                                txtEmpPos.clear();
+                                txtEmpPhone.clear();
+                                txtEmpAddress.clear();
+                                cmboEmpStatus.getSelectionModel().clearSelection();
+                                txtEmpWage.clear();
+                               
+                        
+                        }
+                    } 
+                    
+                    
+                }
+            
+            }
+        });
+        
+        tblEmployee.setItems(empTableData);
+        
+        btnExpenses.setOnAction(e -> {
+        
+        expensePane.setAlignment(Pos.CENTER);
+        expensePane.add(lblExpense, 0, 0);
+        expensePane.add(lblExpFilter, 0, 1, 2, 1);
+        expensePane.add(cmboExpFilter, 1, 1);
+        
+        expensePane.add(tblExpenses, 0, 2, 2, 1);
+        
+        Scene expenseScene = new Scene(expensePane, 600, 500);
+        Stage expenseStage = new Stage();
+        expenseStage.setScene(expenseScene);
+        expenseStage.setTitle("Thrifty Store Current Expenses");
+        expenseStage.show();
+        });
+        
+        // Inventory Button
+        btnInventory.setOnAction(e -> {
+        
+        inventoryPane.setAlignment(Pos.CENTER);
+        inventoryPane.add(lblInventory, 0, 0);
+        inventoryPane.add(cmboInvItem, 0, 2);
+        inventoryPane.add(btnChangeImage, 1, 2);
+        inventoryPane.add(btnAddProd, 2, 2);
+        
+        inventoryPane.add(tblInventory, 0, 1, 3, 1);
+        
+        Scene invScene = new Scene(inventoryPane, 600, 650);
+        Stage invStage = new Stage();
+        invStage.setScene(invScene);
+        invStage.setTitle("Thrifty Store Inventory");
+        invStage.show();
+        });
+        
+        // Supplier Button
+        btnSupplier.setOnAction(e -> {
+        
+        supplierPane.setAlignment(Pos.CENTER);
+        supplierPane.add(lblSupplier, 0, 0);
+        supplierPane.add(cmboSupplier, 1, 0);
+        supplierPane.add(txtSupInfo, 0, 1, 2, 1);
+        supplierPane.add(btnAddSup, 0, 3);
+        supplierPane.add(btnRemSup, 1, 3);
+        
+        supplierPane.add(tblSuppliers, 0, 2, 2, 1);
+        
+        Scene supplierScene = new Scene(supplierPane, 500, 500);
+        Stage supplierStage = new Stage();
+        supplierStage.setScene(supplierScene);
+        supplierStage.setTitle("Thrifty Store Suppliers");
+        supplierStage.show();
+        
+        txtSupInfo.setEditable(false);
+        });
+        
+        btnSchedule.setOnAction(e -> {
+            
+        });
+        
+        
+        
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+    
+}
