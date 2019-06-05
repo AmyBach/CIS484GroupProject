@@ -6,21 +6,23 @@ public class Employee
    public static ArrayList<Employee> Employee = new ArrayList<Employee>();
    
    public int employeeID; 
-   public String employeeName; 
+   public String empName; 
    public String employeePosition;
-   public String employeeAddress;
    public String employeePhone;
+   public String employeeAddress;
+   public int employeeStatus;
    public double employeeWage;
    
    public static int nextEmpID = 0;
    
    // Constructor
-   public Employee(String Name, String Position, String Address, String Phone, double Wage)
+   public Employee(String Name, String Position, String Phone,String Address, int Status, double Wage)
    {
-     this.employeeName = Name;
+     this.empName = Name;
      this.employeePosition = Position;
-     this.employeeAddress = Address; 
      this.employeePhone = Phone; 
+     this.employeeAddress = Address; 
+     this.employeeStatus = Status;
      this.employeeWage = Wage;
      this.employeeID = nextEmpID++;
    }
@@ -33,7 +35,7 @@ public class Employee
    }
    public String getEmployeeName()
    {
-       return this.employeeName; 
+       return this.empName; 
    }
    public String getEmployeePos()
    {
@@ -72,7 +74,8 @@ public class Employee
   @Override
    public String toString() 
    {
-      return "Employee ID: " + this.getEmployeeID() + "Employee Name: " + this.getEmployeeName();
+      return "Employee ID: " + this.getEmployeeID() + " Employee Name: " + this.getEmployeeName();
               
    }
 }
+
