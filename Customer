@@ -1,0 +1,104 @@
+/*
+Customer class in GP
+ */
+package GroupProject;
+
+public class Customer {
+    
+    String customerLastName;
+    String customerFirstName;
+    String customerAddress;
+    String customerPhone;
+    
+    private ID custID;
+    
+    
+    public Customer()
+    {
+        this.customerLastName = customerLastName;
+        this.customerFirstName = customerFirstName;
+        this.customerAddress = customerAddress;
+        this.customerPhone = customerPhone;
+        this.custID = new ID();
+    }
+    
+    
+    //getter setter for First Name
+     public void setCustFirstName(String custFirstName)
+    {
+        //if customer enter nothing
+       if(custFirstName == "")
+        System.out.println("Invalid Input Entered!");
+       else
+        this.customerFirstName = custFirstName;
+    }
+    
+    
+    public String getCustFirstName()
+    {
+        return customerFirstName;
+    }
+    
+    
+    //getter and setter for customer Last Name
+     public void setCustLastName(String custLastName)
+    {
+        //if customer enter nothing
+       if(custLastName == "")
+        System.out.println("Invalid Input Entered!");
+       else
+        this.customerFirstName = custLastName;
+    }
+
+    public String getCustLastName()
+    {
+        return customerLastName;
+    }
+    
+     //getter setter for customer Address
+     public void setCustAddress(String custAddress)
+    {
+        //if customer enter nothing
+       if(custAddress == "")
+        System.out.println("Invalid Input Entered!");
+       else
+        this.customerAddress = custAddress;
+    }
+    
+    public String getCustAddress()
+    {
+        return customerAddress;
+    }
+    
+    
+    //getter setter for customer Phone
+    public void setCustPhone(String custPhone)
+    {
+        //if customer enter nothing
+       if(custPhone == "")
+        System.out.println("Invalid Input Entered!");
+       else
+        this.customerPhone = custPhone;
+    }
+    
+
+    public String getCustPhone()
+    {
+        return customerAddress;
+    }
+    
+    
+    //getID 
+    public int getCustID() {
+        return custID.getIdNumber();
+    }
+    
+    
+    @Override 
+    public String toString() {
+        return "Customer ID: " + custID.getIdNumber() +", Customer Last Name: " +
+                customerLastName + ", First Name: " + customerFirstName;
+    }
+    
+    
+}
