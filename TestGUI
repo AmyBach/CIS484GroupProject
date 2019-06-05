@@ -5,6 +5,7 @@
  */
 package capstonegroupproject;
 
+
 import java.util.ArrayList;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -19,7 +20,8 @@ import javafx.stage.Stage;
 
 
 public class TestGUI extends Application {
- 
+    
+    public static ArrayList<Employee> Employee = new ArrayList<Employee>();
     
     // Create primary pane
     GridPane primaryPane = new GridPane();
@@ -101,7 +103,7 @@ public class TestGUI extends Application {
     //ObservableList<Product> tableData = FXCollections.observableArrayList();
     
     // Observable Lists
-    ObservableList<Employee> empTableData = FXCollections.observableArrayList(Employee.Employee);
+    ObservableList<Employee> empTableData = FXCollections.observableArrayList(Employee);
     ObservableList obsEmpStatus = FXCollections.observableArrayList("Part Time", "Full Time");
     
     
@@ -336,10 +338,12 @@ public class TestGUI extends Application {
                         if (empStatus < 0) {
                             aEmpPos.showAndWait();
                         } else {
-                        Employee employee = new Employee(empName, empPos, 
-                                empAddress, empPhone, empWage1);
-                                Employee.Employee.add(employee);
-                                empTableData.add(employee);
+                        Employee.add(new Employee(empName, empPos,  empPhone, empAddress,empStatus, empWage1));
+
+                                for (Employee em: Employee)
+                                {    
+                                empTableData.add(em);
+                                }
                                 
                                 txtEmpName.clear();
                                 txtEmpPos.clear();
@@ -359,6 +363,13 @@ public class TestGUI extends Application {
         });
         
         tblEmployee.setItems(empTableData);
+         
+        tblcEmpName.setCellValueFactory(new PropertyValueFactory<Employee,String>("empName"));
+        tblcPosition.setCellValueFactory(new PropertyValueFactory<Employee,String>("employeePos")); 
+        tblcPhone.setCellValueFactory(new PropertyValueFactory<Employee,String>("employeePhone")); 
+        tblcAddress.setCellValueFactory(new PropertyValueFactory<Employee,String>("employeeAddress"));
+        tblcWork.setCellValueFactory(new PropertyValueFactory<Employee,Integer>("employeeStatus"));
+        tblcWage.setCellValueFactory(new PropertyValueFactory<Employee,Double>("employeeWage")); 
         
         btnExpenses.setOnAction(e -> {
         
