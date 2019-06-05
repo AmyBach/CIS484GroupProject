@@ -1,0 +1,78 @@
+import java.util.ArrayList;
+
+public class Employee
+{
+  // Data Fields 
+   public static ArrayList<Employee> Employee = new ArrayList<Employee>();
+   
+   public int employeeID; 
+   public String employeeName; 
+   public String employeePosition;
+   public String employeeAddress;
+   public String employeePhone;
+   public double employeeWage;
+   
+   public static int nextEmpID = 0;
+   
+   // Constructor
+   public Employee(String Name, String Position, String Address, String Phone, double Wage)
+   {
+     this.employeeName = Name;
+     this.employeePosition = Position;
+     this.employeeAddress = Address; 
+     this.employeePhone = Phone; 
+     this.employeeWage = Wage;
+     this.employeeID = nextEmpID++;
+   }
+   
+   // Member Methods
+   // Getters
+   public int getEmployeeID()
+   {
+       return this.employeeID; 
+   }
+   public String getEmployeeName()
+   {
+       return this.employeeName; 
+   }
+   public String getEmployeePos()
+   {
+       return this.employeePosition; 
+   }
+   public String getEmployeeAddress()
+   {
+       return this.employeeAddress; 
+   }
+   public String getEmployeePhone()
+   {
+       return this.employeePhone; 
+   }
+   public double getEmployeeWage()
+   {
+       return this.employeeWage; 
+   }
+   // Setters
+   public void setEmpPos(String newPos)
+   {
+       this.employeePosition = newPos;
+   }
+   public void setEmpAddress(String newAddress)
+   {
+       this.employeeAddress = newAddress;
+   }
+   public void setEmpPhone(String newPhone)
+   {
+       this.employeePhone = newPhone;
+   }
+   public void setEmpWage(double newWage)
+   {
+       this.employeeWage = newWage;
+   }
+   
+  @Override
+   public String toString() 
+   {
+      return "Employee ID: " + this.getEmployeeID() + "Employee Name: " + this.getEmployeeName();
+              
+   }
+}
