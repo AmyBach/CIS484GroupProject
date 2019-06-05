@@ -1,0 +1,27 @@
+/*
+Create unique ID
+ */
+package GroupProject;
+
+
+public class ID {
+    
+    private static int idCount = 0;
+    private int idNumber = 0;
+    
+    public ID() {
+        this.idNumber = idCount++;   
+    }
+    
+
+    public int getIdNumber() {
+        return idNumber;
+    }
+
+
+    public String toString() {
+        return "ID: " + idNumber;
+    }
+    
+    
+}
