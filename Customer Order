@@ -1,0 +1,84 @@
+/*
+Customer Order in GP
+ */
+package GroupProject;
+
+import javafx.application.Application;
+import javafx.event.*;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
+
+//added
+import java.util.*;
+import javafx.collections.*;
+import javafx.geometry.Pos;
+
+public class CustomerOrder {
+    
+    public int customerOrderQuantity;
+    public String orderDate;
+
+    Customer customerInfo;
+    Product productInfo;
+ 
+    private ID customerOrderID;
+
+    public CustomerOrder(Product productInfo,int quantity, String date, Customer customerOrder)
+        {
+            this.customerOrderQuantity = quantity;
+            this.orderDate = date;
+            this.customerInfo = customerOrder;
+            this.productInfo = productInfo; 
+            this.customerOrderID = new ID();
+
+            productInfo.setCount(productInfo.getCount() -quantity);
+
+        }
+    
+    public String describeSale()
+        {
+            String describeSale = " ";
+            String custName;
+            custName = customerInfo.getCustFirstName() + " " 
+                    + customerInfo.getCustLastName();
+            this.customerOrderQuantity = customerOrderQuantity;
+
+            describeSale    += "Customer Name:\t" + custName + ",\t"
+                            + "Quantity: " + customerOrderQuantity + ",\t"
+                            + "Date: " + orderDate;
+
+            return describeSale;
+        }
+  
+    public int getId() {
+        return customerOrderID.getIdNumber();
+    }
+
+    public int getQuantity() {
+        return customerOrderQuantity;
+    }
+
+    public String getOrderDate() {
+        return orderDate;
+    }
+
+    public Customer getCustomerInfo() {
+        return customerInfo;
+    }
+
+    public Product getProductInfo() {
+        return productInfo;
+    }
+    
+   
+    @Override
+    public String toString() {
+        return "Sale ID: " + customerOrderID.getIdNumber() + ", Sale Quantity: " +
+                customerOrderQuantity + ", Date: " + orderDate + ", Customer Name: " +
+                customerInfo.getCustFirstName() + " " + customerInfo.getCustLastName() +
+                ", Product Sold: " + productInfo.getProductDescription;
+    }
+       
+}
