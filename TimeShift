@@ -1,0 +1,52 @@
+import java.util.ArrayList;
+
+public class TimeShift 
+{
+    // Data Fields
+    public static ArrayList<Employee> Employee = new ArrayList<Employee>();
+    public static ArrayList<TimeShift> Shifts = new ArrayList<TimeShift>();
+    public int shiftNumID;
+    public String begTime; 
+    public String endTime;
+    
+    public static int nextShiftID = 0; 
+    
+    // Constructors
+    public TimeShift(int EmployeeID, String begHour, String endHour)
+    { 
+        this.begTime = begHour;
+        this.endTime = endHour; 
+        this.shiftNumID = nextShiftID++; 
+        
+    }
+    
+    // Member Methods
+    public int getShiftID()
+    {
+        return this.shiftNumID;
+    }
+    
+    public String getShiftTime()
+    {
+        return "Shift Time: " + this.begTime + " - " + this.endTime;
+    }
+    
+    public void setBegHour(String newBegHour)
+    {
+        this.begTime = newBegHour;
+    }
+    
+    public void setEndHour(String newEndHour)
+    {
+        this.endTime = newEndHour;
+    }
+    
+    
+    @Override
+    public String toString()
+    {
+        return "Shift ID: " + this.getShiftID() + " " + this.getShiftTime();
+    }
+
+            
+}
