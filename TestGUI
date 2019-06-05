@@ -338,7 +338,7 @@ public class TestGUI extends Application {
                         if (empStatus < 0) {
                             aEmpPos.showAndWait();
                         } else {
-                        Employee.add(new Employee(empName, empPos,  empPhone, empAddress,empStatus, empWage1));
+                        Employee.add(new Employee(empName, empPos,  empPhone, empAddress, empStatus, empWage1));
 
                                 for (Employee em: Employee)
                                 {    
@@ -364,12 +364,12 @@ public class TestGUI extends Application {
         
         tblEmployee.setItems(empTableData);
          
-        tblcEmpName.setCellValueFactory(new PropertyValueFactory<Employee,String>("empName"));
-        tblcPosition.setCellValueFactory(new PropertyValueFactory<Employee,String>("employeePos")); 
-        tblcPhone.setCellValueFactory(new PropertyValueFactory<Employee,String>("employeePhone")); 
-        tblcAddress.setCellValueFactory(new PropertyValueFactory<Employee,String>("employeeAddress"));
-        tblcWork.setCellValueFactory(new PropertyValueFactory<Employee,Integer>("employeeStatus"));
-        tblcWage.setCellValueFactory(new PropertyValueFactory<Employee,Double>("employeeWage")); 
+        tblcEmpName.setCellValueFactory(new PropertyValueFactory<Employee,String>("EmployeeName"));
+        tblcPosition.setCellValueFactory(new PropertyValueFactory<Employee,String>("EmployeePos")); 
+        tblcPhone.setCellValueFactory(new PropertyValueFactory<Employee,String>("EmployeePhone")); 
+        tblcAddress.setCellValueFactory(new PropertyValueFactory<Employee,String>("EmployeeAddress"));
+        tblcWork.setCellValueFactory(new PropertyValueFactory<Employee,String>("EmpStatus"));
+        tblcWage.setCellValueFactory(new PropertyValueFactory<Employee,Double>("EmployeeWage")); 
         
         btnExpenses.setOnAction(e -> {
         
