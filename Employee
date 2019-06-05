@@ -10,19 +10,19 @@ public class Employee
    public String employeePosition;
    public String employeePhone;
    public String employeeAddress;
-   public int employeeStatus;
+   public String employeeStatus;
    public double employeeWage;
    
    public static int nextEmpID = 0;
    
    // Constructor
-   public Employee(String Name, String Position, String Phone,String Address, int Status, double Wage)
+   public Employee(String Name, String Position, String Phone, String Address, int Status, double Wage)
    {
      this.empName = Name;
      this.employeePosition = Position;
      this.employeePhone = Phone; 
      this.employeeAddress = Address; 
-     this.employeeStatus = Status;
+     this.employeeStatus = setEmpStatus(Status);
      this.employeeWage = Wage;
      this.employeeID = nextEmpID++;
    }
@@ -69,6 +69,22 @@ public class Employee
    public void setEmpWage(double newWage)
    {
        this.employeeWage = newWage;
+   }
+   public String getEmpStatus() 
+   {
+       return this.employeeStatus;
+   }
+   public String setEmpStatus(int Status)
+   {
+       String status = "";
+       switch(Status) {
+          case 0: status = "Part-Time";
+            break;
+          case 1: status = "Full-Time";
+            break;
+          default: status = "null";
+       }
+       return status;
    }
    
   @Override
