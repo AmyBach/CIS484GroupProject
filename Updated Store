@@ -1,3 +1,4 @@
+   public class Store {
    //Data Fields
 
     public int storeID;
