@@ -1,3 +1,6 @@
+public class Schedule 
+
+{
 public int shiftNumID;
     
     public String date;
