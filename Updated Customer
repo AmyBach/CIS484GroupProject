@@ -4,10 +4,11 @@ public class Customer {
     private String customerAddress;
     private String customerPhone;
     private String customerEmail;
+    private boolean clubMember;
     private int custID;
     private static int nextID = 0;
     
-    public Customer(String name, String phone, String address, String email )
+    public Customer(String name, String phone, String address, String email, boolean status )
 
     {
 
@@ -18,18 +19,22 @@ public class Customer {
         this.customerPhone = phone;
         
         this.customerEmail = email;
+        
+        this.clubMember = status;
 
         this.custID = nextID++;
 
     }
     
-    public Customer(String name, String phone )
+    public Customer(String name, String phone, boolean status )
 
     {
 
         this.customerName = name;
 
         this.customerPhone = phone;
+        
+         this.clubMember = status;
 
         this.custID = nextID++;
 
@@ -191,7 +196,24 @@ public class Customer {
         this.customerEmail = email;
     }
     
-
+    public boolean getClubStatus()
+    {
+        return this.clubMember;
+    }
+    
+    public void setClubStatus(boolean status)
+    {
+        this.clubMember = status;
+    }
+    
+    public void getDiscount(Product prod)
+    {
+        double discountPrice;
+        if(this.clubMember == true)
+        {
+           discountPrice = prod.getSalePrice() - (prod.getSalePrice() * .15);
+        }
+    }
     
 
     @Override 
@@ -200,12 +222,6 @@ public class Customer {
 
         return "Customer ID: " + this.getCustID() +", Customer Name: " +
 
-                this.customerName;
+                this.customerName + ", Member: " + this.getClubStatus();
 
     }
-
-    
-
-    
-
-}
