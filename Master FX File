@@ -24,6 +24,7 @@ public class FinalThrift extends Application {
  public static ArrayList<Product> Product = new ArrayList<Product>();
  public static ArrayList<Supplier> Supplier = new ArrayList<Supplier>();
  public static ArrayList<Expense> Expense = new ArrayList<Expense>();
+ public static ArrayList<Customer> ClubMembers = new ArrayList<Customer>();
     
 
     // Create primary pane
@@ -37,35 +38,35 @@ public class FinalThrift extends Application {
 
     
     // Employee Panes
-    GridPane employeePane = new GridPane();
+    GridPane employeePane;
 
-    GridPane addEmployeePane = new GridPane();
+    GridPane addEmployeePane;
     
     
     // Inventory Panes
-    GridPane inventoryPane = new GridPane();
+    GridPane inventoryPane;
     
-    GridPane addProductPane = new GridPane();
+    GridPane addProductPane;
 
     
     // Expense Panes
-    GridPane expensePane = new GridPane();
+    GridPane expensePane;
     
-    GridPane addExpensePane = new GridPane();
+    GridPane addExpensePane;
 
     
     // Supplier Panes
-    GridPane supplierPane = new GridPane();
+    GridPane supplierPane;
     
-    GridPane addSupplierPane = new GridPane();
+    GridPane addSupplierPane;
 
     
     // Schedule Panes
-    GridPane schedulePane = new GridPane();
+    GridPane schedulePane;
     
     
     // Customer Panes
-    GridPane custAcctPane = new GridPane();
+    GridPane custAcctPane;
     
 
     
@@ -113,6 +114,8 @@ public class FinalThrift extends Application {
     Button btnPrint = new Button("Print Receipt"); // POS Page
 
     Button btnCreateCustAccount = new Button("Create Customer");
+    
+    Button btnNewCustAccount = new Button("Create Customer");
     
     Button btnAddEmpSch = new Button("Add to Schedule"); // Schedule Button
     
@@ -371,6 +374,9 @@ public class FinalThrift extends Application {
     private static int prodArrayPos = 0;
     private static int supArrayPos = 0;
     private static int expArrayPos = 0;
+    
+    // CheckBox
+    CheckBox chkThriftyClub = new CheckBox("Add to Thrifty Club?");
 
     public void start(Stage primaryStage) {
 
@@ -408,13 +414,13 @@ public class FinalThrift extends Application {
 
         reportsPane.setAlignment(Pos.TOP_LEFT);
         
-        schedulePane.setAlignment(Pos.CENTER);
+        //schedulePane.setAlignment(Pos.CENTER);
 
         reportsPane.setPadding(new Insets(10, 10, 10, 10));
 
         posPane.setPadding(new Insets(10, 10, 10, 10));
 
-        custAcctPane.setAlignment(Pos.CENTER);
+        //custAcctPane.setAlignment(Pos.CENTER);
         
 
         // Pane Hgaps and Vgaps
@@ -426,31 +432,27 @@ public class FinalThrift extends Application {
 
         reportsPane.setVgap(10);
 
-        expensePane.setHgap(10);
-
-        expensePane.setVgap(10);
-
-        supplierPane.setHgap(20);
-
-        supplierPane.setVgap(20);
-
-        inventoryPane.setHgap(20);
-
-        inventoryPane.setVgap(20);
-
-        employeePane.setHgap(15);
-
-        employeePane.setVgap(15);
-
-        schedulePane.setHgap(10);
-        
-        schedulePane.setVgap(10);
-        
-        custAcctPane.setHgap(10);
-        
-        custAcctPane.setVgap(15);
-        
-        addExpensePane.setVgap(15);
+//        expensePane.setHgap(10);
+//
+//        expensePane.setVgap(10);
+//
+//        supplierPane.setHgap(20);
+//
+//        supplierPane.setVgap(20);
+//
+//        inventoryPane.setHgap(20);
+//
+//        inventoryPane.setVgap(20);
+//
+//        schedulePane.setHgap(10);
+//        
+//        schedulePane.setVgap(10);
+//        
+//        custAcctPane.setHgap(10);
+//        
+//        custAcctPane.setVgap(15);
+//        
+//        addExpensePane.setVgap(15);
         
 
         // Set button size and fonts
@@ -483,7 +485,7 @@ public class FinalThrift extends Application {
 
         posPane.add(btnPrint, 3, 2, 2, 1);
 
-         posPane.add(btnCreateCustAccount,5, 2);
+        posPane.add(btnCreateCustAccount,5, 2);
 
         
 
@@ -680,7 +682,7 @@ public class FinalThrift extends Application {
 
         btnEmployees.setOnAction(e -> {
 
-        
+        employeePane = new GridPane();
 
         employeePane.setAlignment(Pos.CENTER);
 
@@ -707,6 +709,10 @@ public class FinalThrift extends Application {
         empStage.setTitle("Thrifty Store Employees");
 
         empStage.show();
+        
+        employeePane.setHgap(15);
+
+        employeePane.setVgap(15);
 
         });
 
@@ -716,6 +722,8 @@ public class FinalThrift extends Application {
 
         btnAddNewEmp.setOnAction(e -> {
 
+            addEmployeePane = new GridPane();
+            
             addEmployeePane.setAlignment(Pos.CENTER);
 
             addEmployeePane.setVgap(10);
@@ -893,10 +901,8 @@ public class FinalThrift extends Application {
         // Expenses Button
         btnExpenses.setOnAction(e -> {
 
+        expensePane = new GridPane();
         
-
-        expensePane.setAlignment(Pos.CENTER);
-
         expensePane.add(lblExpense, 0, 0);
 
         expensePane.add(lblExpFilter, 0, 1, 2, 1);
@@ -911,6 +917,12 @@ public class FinalThrift extends Application {
         
 
         expensePane.add(tblExpenses, 0, 2, 3, 1);
+        
+        expensePane.setHgap(10);
+
+        expensePane.setVgap(10);
+        
+        expensePane.setAlignment(Pos.CENTER);
         
         
 
@@ -928,6 +940,8 @@ public class FinalThrift extends Application {
         
         
         btnAddExpense.setOnAction(e -> {
+            
+            addExpensePane = new GridPane();
             
             addExpensePane.setAlignment(Pos.CENTER);
             
@@ -948,6 +962,8 @@ public class FinalThrift extends Application {
             addExpensePane.add(txtExpPaid, 1, 3);
             
             addExpensePane.add(btnAddNewExpense, 1, 4);
+            
+            addExpensePane.setVgap(15);
             
             Scene addExpenseScene = new Scene(addExpensePane, 500, 500);
             
@@ -1001,7 +1017,7 @@ public class FinalThrift extends Application {
 
         btnInventory.setOnAction(e -> {
 
-        
+        inventoryPane = new GridPane();
 
         inventoryPane.setAlignment(Pos.CENTER);
 
@@ -1017,7 +1033,9 @@ public class FinalThrift extends Application {
 
         inventoryPane.add(tblInventory, 0, 1, 3, 1);
 
-        
+        inventoryPane.setHgap(20);
+
+        inventoryPane.setVgap(20);
 
         Scene invScene = new Scene(inventoryPane, 600, 650);
 
@@ -1032,6 +1050,8 @@ public class FinalThrift extends Application {
         });
         
         btnAddNewProd.setOnAction(f -> {
+            
+            addProductPane = new GridPane();
 
             addProductPane.setAlignment(Pos.CENTER);
 
@@ -1189,7 +1209,7 @@ public class FinalThrift extends Application {
         // Supplier Button
         btnSupplier.setOnAction(e -> {
 
-        
+        supplierPane = new GridPane();
 
         supplierPane.setAlignment(Pos.CENTER);
 
@@ -1206,6 +1226,10 @@ public class FinalThrift extends Application {
         
 
         supplierPane.add(tblSuppliers, 0, 2, 2, 1);
+        
+        supplierPane.setHgap(20);
+
+        supplierPane.setVgap(20);
 
         
 
@@ -1228,7 +1252,7 @@ public class FinalThrift extends Application {
 
          btnAddSup.setOnAction(e ->{
 
-             
+             addSupplierPane = new GridPane();
 
             addSupplierPane.setAlignment(Pos.CENTER);
 
@@ -1360,6 +1384,8 @@ public class FinalThrift extends Application {
         
 
         btnSchedule.setOnAction(e -> {
+            
+        schedulePane = new GridPane();    
 
          schedulePane.add(lblDaySelection, 0, 0);
         schedulePane.add(daySelection, 0, 1, 3, 1); 
@@ -1369,6 +1395,12 @@ public class FinalThrift extends Application {
         schedulePane.add(cmboEndTime, 2, 3);
         schedulePane.add(cmboEmpSch, 1, 4);
         schedulePane.add(btnAddEmpSch, 1, 5);
+        
+        schedulePane.setHgap(10);
+        
+        schedulePane.setVgap(10);
+        
+        schedulePane.setAlignment(Pos.CENTER);
             
         Scene scheduleScene = new Scene(schedulePane, 400, 400);
         Stage scheduleStage = new Stage();
@@ -1405,6 +1437,8 @@ public class FinalThrift extends Application {
 
         btnCreateCustAccount.setOnAction(e -> {
         
+        custAcctPane = new GridPane();
+            
         custAcctPane.add(lblCustName, 0, 0);
         custAcctPane.add(txtCustName, 1, 0);
         custAcctPane.add(lblCustPhone, 0, 1);
@@ -1413,7 +1447,14 @@ public class FinalThrift extends Application {
         custAcctPane.add(txtCustAddress, 1, 2);
         custAcctPane.add(lblCustEmail, 0, 3);
         custAcctPane.add(txtCustEmail, 1, 3);
-        custAcctPane.add(btnCreateCustAccount, 0, 4, 2, 1);
+        custAcctPane.add(chkThriftyClub, 1, 4);
+        custAcctPane.add(btnNewCustAccount, 0, 5, 2, 1);
+        
+        custAcctPane.setHgap(10);
+        
+        custAcctPane.setVgap(15);
+        
+        custAcctPane.setAlignment(Pos.CENTER);
             
         Scene custAcctScene = new Scene(custAcctPane, 400, 400);
         Stage custAcctStage = new Stage();
@@ -1422,31 +1463,51 @@ public class FinalThrift extends Application {
 
         custAcctStage.show();
         
-        btnCreateCustAccount.setOnAction(f -> {
+        btnNewCustAccount.setOnAction(f -> {
             
-        if(txtCustName.getText().length() > 0 &&
-                txtCustPhone.getText().length() > 0 &&
-                txtCustAddress.getText() == null &&
-                txtCustEmail.getText() == null)
+        if(chkThriftyClub.isSelected())
         {
-            Customer.add(new Customer(txtCustName.getText(), txtCustPhone.getText()));
+            if(txtCustName.getText().length() > 0 &&
+                    txtCustPhone.getText().length() > 0 &&
+                    txtCustAddress.getText() == null &&
+                    txtCustEmail.getText() == null)
+            {
+                Customer.add(new Customer(txtCustName.getText(), txtCustPhone.getText(), true));
+            }
+            else
+            {
+                Customer.add(new Customer(txtCustName.getText(), txtCustPhone.getText(),
+                txtCustAddress.getText(), txtCustEmail.getText(), true));
+            }
         }
         else
         {
-            Customer.add(new Customer(txtCustName.getText(), txtCustPhone.getText(),
-            txtCustAddress.getText(), txtCustEmail.getText()));
+            if(txtCustName.getText().length() > 0 &&
+                    txtCustPhone.getText().length() > 0 &&
+                    txtCustAddress.getText() == null &&
+                    txtCustEmail.getText() == null)
+            {
+                Customer.add(new Customer(txtCustName.getText(), txtCustPhone.getText(), false));
+            }
+            else
+            {
+                Customer.add(new Customer(txtCustName.getText(), txtCustPhone.getText(),
+                txtCustAddress.getText(), txtCustEmail.getText(), false));
+            }
         }
         
         txtCustName.clear();
         txtCustPhone.clear();
         txtCustAddress.clear();
         txtCustEmail.clear();
+        chkThriftyClub.setSelected(false);
         
-//        System.out.println(Customer.get(0).toString());
+        //System.out.println(Customer.get(0).toString());
         
         });
         
         });
+
     }
 
 
