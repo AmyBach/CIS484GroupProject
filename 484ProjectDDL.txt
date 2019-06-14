@@ -32,7 +32,9 @@ Position VarChar(25),
 Address VarChar(50),
 Phone Integer,
 Type VarChar(20),
-Wage Number(3,2));
+Wage Number(3,2),
+Username VarChar(30),
+Password VarChar(30));
 
 Create table Department
 (departmentID Integer Primary Key,
@@ -43,6 +45,12 @@ Create table TimeShift
 begTime Integer,
 endTime Integer,
 TSDate VarChar(11));
+
+Create table Expense
+(expenseID Integer Primary Key,
+Name VarChar(30),
+Amount Number(6,2),
+DueDate VarChar(11));
 
 Create table Payroll
 (payrollID Integer Primary Key,
